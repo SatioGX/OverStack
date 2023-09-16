@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
 
+import { InputText } from 'primereact/inputtext';
+
+import 'primereact/resources/themes/bootstrap4-dark-blue/theme.css'
+import 'primereact/resources/primereact.min.css'
+
+import { useState } from 'react';
+
 function App() {
-  return (
+  const [text, setText] = useState('');
+
+  return ( 
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={logo} className="App-logo" alt="logo"/>
+
+        <InputText value={text} onChange={e => setText(e.target.value)} />
+        {text}
       </header>
+      <footer>
+        <h3>Berth Loves Stubbert</h3>
+      </footer>
     </div>
   );
 }
