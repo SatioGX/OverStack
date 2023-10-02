@@ -1,0 +1,62 @@
+/* loginForm.css */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    height: 40px;
+  }
+  
+  .login-form input[type="submit"] {
+    background-color: #ff6923; /* Stack Overflow's orange color */
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .login-form input[type="submit"]:hover {
+    background-color: #e55c1e; /* Darker shade of orange on hover */
+  }
+  
+  .login-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .login-form p {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .login-form p a {
+    color: #0077cc; /* Stack Overflow's blue link color */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-form p a:hover {
+    text-decoration: underline;
+  }
+  
