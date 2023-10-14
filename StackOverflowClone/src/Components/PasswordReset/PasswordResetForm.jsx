@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'primereact/button';
 import './PasswordResetForm.css';
 
@@ -13,7 +13,7 @@ function PasswordResetForm() {
   return (
     <form className="password-reset-form" onSubmit={handlePasswordReset}>
       <h1>Reset Your Password</h1>
-      <p>Enter the email address associated with your account, and we'll send you a link to reset your password.</p>
+      <p>Enter the email address associated with your account, and we&apos;ll send you a link to reset your password.</p>
       <input
         type="email"
         placeholder="Email"
