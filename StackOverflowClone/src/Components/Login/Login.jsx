@@ -10,7 +10,7 @@ function Login() {
     <div className="login-container">
       <div className="login-content">
         <h1>Log in to Stack Overflow</h1>
-        <LoginForm /> {/* Ensure this is present */}
+        <LoginForm /> 
         {/* Add more elements here */}
       </div>
     </div>
