@@ -7,6 +7,7 @@ import { Routes } from 'react-router-dom';
 import Login from "./Pages/Login/Login";
 import SignUp from './Pages/Signup/Signup';
 import PasswordReset from './Pages/PasswordReset/PasswordReset';
+import HomePage from './pages/Home/HomePage';
 
 function App() {
   
