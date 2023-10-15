@@ -1,63 +1,66 @@
-/* SignupForm.css */
-.signup-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+/* SignUpForm.css */
+
+/* Center the sign-up form */
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+}
+
+/* Style the form container */
+.surface-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+}
+#password{
+  padding-bottom: 20px;
   
-  .signup-form input {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .signup-form input[type="text"],
-  .signup-form input[type="email"],
-  .signup-form input[type="password"] {
-    height: 40px;
-  }
-  
-  .signup-form input[type="submit"] {
-    background-color: #0077cc; /* Stack Overflow's blue color */
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .signup-form input[type="submit"]:hover {
-    background-color: #005299; /* Darker shade of blue on hover */
-  }
-  
-  .signup-form h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .signup-form p {
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .signup-form p a {
-    color: #ff6923; /* Stack Overflow's orange link color */
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .signup-form p a:hover {
-    text-decoration: underline;
-  }
-  
+}
+/* Style the main heading */
+.text-900 {
+  font-weight: 900;
+}
+
+/* Style input labels */
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+/* Set input fields to full width */
+.w-full {
+  width: 100% !important;
+}
+
+/* Style the submit button */
+.p-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Style anchor tags (if any) */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* Set the text color to black */
+.text-900, .text-600, .font-medium {
+  color: #000;
+}

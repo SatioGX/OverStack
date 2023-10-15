@@ -1,21 +1,16 @@
+/* Login.js */
 import React from 'react';
 import LoginForm from "./LoginForm";
-
-
-
-
+import './Login.css';
 
 function Login() {
   return (
-    <div className="login-container">
+
       <div className="login-content">
-        <h1>Log in to Stack Overflow</h1>
-        <LoginForm /> 
-        {/* Add more elements here */}
+        <LoginForm />
       </div>
-    </div>
+
   );
 }
-
 
 export default Login;

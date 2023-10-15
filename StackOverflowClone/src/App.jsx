@@ -1,4 +1,4 @@
-// App.js
+App.js
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -15,7 +15,7 @@ function App() {
     
       <Router>
         <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path='/resetpassword' element={<PasswordReset />} />
         </Routes>

@@ -1,21 +1,17 @@
+/* SignUp.js */
 import React from 'react';
-import SignupForm from "./SignupForm";
-
-
-
-
+import SignUpForm from "./SignUpForm";
+import './SignUpForm.css';
 
 function SignUp() {
   return (
-    <div className="Signup-container">
-      <div className="Signup-content">
-        <h1>Sign Up to Stack Overflow</h1>
-        <SignupForm /> {/* Ensure this is present */}
-        {/* Add more elements here */}
+    <div className="signup-container">
+      <div className="signup-content">
+        
+        <SignUpForm />
       </div>
     </div>
   );
 }
-
 
 export default SignUp;
