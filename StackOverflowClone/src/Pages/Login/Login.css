@@ -1,27 +1,3 @@
-/* LoginForm.css */
-
-
-
-.login-content {
-  background: gray;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  max-height: 400px;
-}
-
-h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
-}
 
 /* Add more styles for the LoginForm component */
 
