@@ -1,0 +1,88 @@
+/* LoginForm.css */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Change 'height' to 'min-height' */
+  background-color: #f0f0f0;
+}
+
+.surface-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  height: auto; /* Set to 'auto' to allow content to dictate height */
+  display: flex; /* Add this line to center content vertically */
+  flex-direction: column; /* Add this line to center content vertically */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.flex{
+  padding: 20px;
+  height: min-content;
+}
+.text-900 {
+  font-weight: 900;
+  padding-bottom: 10px;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Add more styles as needed */
+
+/* Style the submit button */
+.p-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Style the link for "Create today!" and "Forgot your password?" */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Style the checkbox */
+.p-checkbox-box {
+  border: 1px solid #007bff;
+}
+
+/* Style the "Remember me" label */
+.p-checkbox-label {
+  margin-left: 5px;
+  
+}
+
+/* Style the logo */
+.logo {
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.text-900, .text-600, .font-medium {
+  color: #000; /* Black color */
+}
+
+
+
+/* Add more styles for the LoginForm component */
