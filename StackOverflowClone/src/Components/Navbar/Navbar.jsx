@@ -26,6 +26,7 @@ export default function Navbar() {
         </div>
         <div className='navbar-buttons'>
             <Button>Log in</Button>
+            <Button>Settings</Button>
             <Button className="p-button-outlined">Sign up</Button>
         </div>
     </div>
