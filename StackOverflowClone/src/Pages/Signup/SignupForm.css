@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-
+ 
 }
 
 /* Style the form container */
@@ -17,6 +17,7 @@
   padding: 20px;
   text-align: center;
   max-width: 400px;
+   padding-bottom: 10px;
 }
 #password{
   padding-bottom: 20px;
@@ -25,6 +26,7 @@
 /* Style the main heading */
 .text-900 {
   font-weight: 900;
+  padding-bottom: 10px;
 }
 
 /* Style input labels */
@@ -32,10 +34,7 @@
   margin-bottom: 0.5rem;
 }
 
-/* Set input fields to full width */
-.w-full {
-  width: 100% !important;
-}
+
 
 /* Style the submit button */
 .p-button {
@@ -46,7 +45,9 @@
   padding: 10px 20px;
   cursor: pointer;
 }
-
+.p-inputtext {
+  width: 100%;
+}
 /* Style anchor tags (if any) */
 a {
   color: #007bff;
