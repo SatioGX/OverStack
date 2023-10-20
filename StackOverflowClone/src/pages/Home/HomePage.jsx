@@ -1,14 +1,37 @@
-import Navbar from '../../Components/Navbar/Navbar'
-import WelcomeCard from '../../Components/WelcomeCard/WelcomeCard'
-import './style.css'
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../../Components/Navbar/Navbar';
+import WelcomeCard from '../../Components/WelcomeCard/WelcomeCard';
+import './style.css';
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
+  const handleJoinCommunityClick = () => {
+    navigate('/signup')
+  }
+
+  const handleSearchContentClick = () => {
+    navigate('/questions') // to questions page 
+  }
   return (
     <div>
         <Navbar />
         <div className="card-container">
-            <WelcomeCard buttonText="Join Our Community" buttonType="primary" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"/>
-            <WelcomeCard buttonText="Search Contents" buttonType="info" isOutlined={true} message="Habitant morbi tristique senectus et netus et malesuada fames. Laoreet non curabitur gravida arcu." />
+            <WelcomeCard 
+              buttonText="Join Our Community" 
+              buttonType="primary" 
+              handleButtonClick={handleJoinCommunityClick}
+              icon="pi pi-user"
+              message="Discover the optimal solution to your technical query while assisting others in resolving their own."
+            />
+            <WelcomeCard 
+              buttonText="Search Contents" 
+              buttonType="info" 
+              handleButtonClick={handleSearchContentClick}
+              icon="pi pi-search"
+              isOutlined={true} 
+              message="You are getting stuck at somewhere in your code ? Feel free to find answers and ask question" 
+            />
         </div>
     </div>
   )
