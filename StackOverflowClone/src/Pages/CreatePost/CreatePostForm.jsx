@@ -1,31 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { InputTextarea } from 'primereact/inputtextarea';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 
-import './CreatePostForm.css'
+import ReactQuill, {Quill, editor} from 'react-quill';
 
-// TODO: Add text styling options. Still seeking options for this feature however it's looking
-// like it will be quill since it's compatible.
+import 'react-quill/dist/quill.snow.css';
+import 'highlight.js/styles/vs2015.css'
+import './CreatePostForm.css';
 
-function CreatePostForm() {
-    const [title] = useState('');
-    const [question] = useState('');
-    const [tags] = useState([]);
-
-    const handlePost = () => {
-
+const CreatePostForm = () => {
+    const [text,setText] = useState('');
+    
+    const handleChange = (html) => {
+        setText(html);
     }
 
+    const modules = {
+        syntax: true,
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+
+            [{ 'header': 1 }, { 'header': 2 }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'direction': 'rtl' }],   
+
+            ['clean']
+        ]
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+    };
+
     return (
-        <form className="wide-form">
+        <form className="wide-form" onSubmit={handleFormSubmit}>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <InputText id="title" className="p-inputtext form-control" placeholder="What's your programming question? Be specific." />
             </div>
             <div className="form-group">
-                <InputTextarea id="body" rows={5} className="p-inputtext form-control" />
+                <ReactQuill value={text} onChange={handleChange} modules={modules} />
             </div>
             <div className="form-group">
                 <label htmlFor="tags">Tags</label>
