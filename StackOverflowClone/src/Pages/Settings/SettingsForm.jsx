@@ -13,33 +13,38 @@ function SettingsForm() {
     // Implement your Settings logic here
   };
   return (
-    <div>
+    <div class = "read-Only">
     <h1>Account Settings</h1>
     <form>
-        <h2>Profile Information</h2>
-        <div>
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" name="name" />
+    <label htmlFor="name">Name:</label>
+        <div class = "flex-container">
+        <div class="flex-rectangle"></div>
+        <div class = "flex-col"> 
+            <label class = "flex-bio">Recent Activities</label>
+            <textarea class="read-only">RECENT ACTIVITIES HERE</textarea>
         </div>
-        <div>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" />
         </div>
-        <div>
-            <label htmlFor="location">Location:</label>
-            <input type="text" id="location" name="location" />
-        </div>
-        <div>
-            <label htmlFor="website">Website:</label>
-            <input type="text" id="website" name="website" />
-        </div>
-        <div>
-            <label htmlFor="aboutMe">About Me:</label>
-            <textarea id="aboutMe" name="aboutMe"></textarea>
+
+
+        <div class = "flex-container">
+
+            <div class = "flex-panel margins">
+                <label htmlFor="location">Bio:</label>
+                <textarea class="read-only">BIO HERE</textarea>
+            </div>
+            <div class = "flex-panel margins">
+                <label htmlFor="website">Posts</label>
+                <textarea class="read-only">POSTS HERE</textarea>
+            </div>
+            <div class = "flex-panel margins">
+                <label htmlFor="aboutMe">Achievements</label>
+                <textarea class="read-only">Achievements here</textarea>
+            </div>
         </div>
  
         <div>
-            <button type="submit">Save Changes</button>
+                <label htmlFor="aboutMe">Repos</label>
+                <textarea class="read-only">Repos here</textarea>
         </div>
     </form>
     </div>
