@@ -8,6 +8,7 @@ import Login from "./Pages/Login/Login";
 import SignUp from './Pages/Signup/Signup';
 import PasswordReset from './Pages/PasswordReset/PasswordReset';
 import HomePage from './pages/Home/HomePage';
+import Settings from './Pages/Settings/Settings';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path='/resetpassword' element={<PasswordReset />} />
         <Route path='/home' element={<HomePage />} />
+        <Route path='/Settings' element={<Settings />} />
         </Routes>
       </Router>
       

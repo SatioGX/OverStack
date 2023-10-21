@@ -1,0 +1,100 @@
+/* Reset default browser styles */
+body, h1, h2, h3, p, ul, ol, li, input, button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 100%;
+    font-family: Arial, sans-serif;
+    vertical-align: baseline;
+}
+
+body {
+    line-height: 1;
+
+}
+
+
+
+h1, h2, h3 {
+    font-weight: normal;
+    color: #333;
+}
+
+/* Define a general container style */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Add a form style */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="bio"],
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.flex-container{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.flex-rectangle {
+    
+    height: 100px;
+    width: 75px;
+    background-color: #555;
+}
+
+
+.flex-col{
+    flex: 1;
+    margin: 0px 200px 0px 20px;
+}
+
+.flex-panel{
+    flex: 1;
+}
+
+.read-only {
+  pointer-events: none;
+  background-color: #f5f5f5;
+  color: #666;
+}
+ 
+.margins {
+    margin: 20px;
+}
