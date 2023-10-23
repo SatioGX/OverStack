@@ -8,7 +8,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import 'primereact/resources/primereact.css';
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../firebaseconfig';
+import { auth } from '../../../firebaseconfig';
 
 
 
@@ -77,7 +77,7 @@ function SignupForm() {
               className="w-full mb-3"
             />
 
-            <Button disabled={isLoading} type="submit" label="Sign Up" className="w-full" />
+            <Button icon={isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-user'} disabled={isLoading}  type="submit" label="Sign Up" className="w-full" />
 
             <Link to="/">Already have an account ?</Link>
 
