@@ -9,6 +9,7 @@ import PasswordReset from './Pages/PasswordReset/PasswordReset';
 import CreatePost from './Pages/CreatePost/CreatePost'
 import HomePage from './pages/Home/HomePage';
 import Settings from './Pages/Settings/Settings';
+import Navbar from './Components/Navbar/Navbar'
 
 
 
@@ -41,10 +42,10 @@ function App() {
 
 
   return (
-
-
+    <div>
+    {currentUserState && <Navbar data={currentUserState} />}
     <Routes>
-      {currentUserState && <Navbar data={currentUserState} />}
+      
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path='/resetpassword' element={<PasswordReset />} />
@@ -57,8 +58,7 @@ function App() {
 
 
     </Routes>
-
-
+    </div>
 
   );
 }

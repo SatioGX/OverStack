@@ -6,7 +6,7 @@ import SettingsForm from './SettingsForm';
 function Settings() {
   return (
     <div>
-      <Navbar />
+     
         <div>
           <div className="settings-content">
             <SettingsForm/>

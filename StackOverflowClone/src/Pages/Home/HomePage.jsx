@@ -15,7 +15,7 @@ export default function HomePage() {
   }
   return (
     <div>
-        <Navbar />
+       
         <div className="card-container">
             <WelcomeCard 
               buttonText="Join Our Community" 
