@@ -92,4 +92,4 @@ function SignupForm() {
 }
 SignupForm.proptypes = {};
 
-export default SignupForm;
+export { SignupForm };

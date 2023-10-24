@@ -32,9 +32,9 @@ function LoginForm() {
       if (user) {
         setTimeout(() => {
           setIsLoading(false);
-          localStorage.setItem("current-user", JSON.stringify(user));
+          localStorage.setItem("currentUser", JSON.stringify(user));
           alert("User Succesfully Logged In");
-          navigate("/home");
+          useNavigate("/home");
         }, 2000);
       }
     } catch (error) {

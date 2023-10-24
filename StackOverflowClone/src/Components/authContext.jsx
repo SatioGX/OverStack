@@ -1,43 +1,49 @@
-import { User } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { SignOutUser, userStateListener } from "../firebaseUser"
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { useNavigate } from 'react-router-dom';
+import { SignOutUser, userStateListener } from "../../firebaseActions";
+import { createContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext({
-  currentUser: null, // Initialize currentUser as null
+  currentUser: null,
   setCurrentUser: (_user) => {},
-  signOut: () => {}
+  signOut: () => {},
 });
 
 function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null); // Initialize currentUser as null
-
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
+  // Load user email from localStorage on component mount
   useEffect(() => {
-    // Your user state listener logic, which updates currentUser
-    userStateListener((User) => {
-      if (User) {
-        setCurrentUser(User);
-      } else {
-        setCurrentUser(null);
-        navigate("/"); // Redirect to the login page when user is not authenticated
+    const storedEmail = localStorage.getItem('email');
+    if (storedEmail) {
+      setCurrentUser({ email: storedEmail });
+    }
+
+    const unsubscribe = userStateListener((user) => {
+      if (user) {
+        // Set the user's email in localStorage
+        localStorage.setItem('email', user.email);
+        setCurrentUser(user);
       }
     });
-  }, [navigate]);
+    return unsubscribe;
+  }, []);
 
   const signOut = () => {
-    SignOutUser().then(() => {
-      setCurrentUser(null);
-      navigate("/"); // Redirect to the login page after signing out
-    });
+    // Remove the user's email from localStorage
+    localStorage.removeItem('email');
+    SignOutUser();
+    setCurrentUser(null);
+    navigate('/');
+  }
+
+  const value = {
+    currentUser,
+    setCurrentUser,
+    signOut,
   };
 
-  return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser, signOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export { AuthContext, AuthProvider };

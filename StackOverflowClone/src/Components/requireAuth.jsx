@@ -1,18 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./authContext";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 function RequireAuth({ children }) {
-  const { currentUser } = useContext(AuthContext);
-  let location = useLocation();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if the currentUser is stored in localStorage on the initial render
+  useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setCurrentUser(parsedUser);
+      navigate('/home'); // Navigate to the home page if currentUser is found in localStorage
+    }
+  }, [setCurrentUser, navigate]);
 
   if (!currentUser) {
-    // Redirect the user to the home page.
-    // Please, close the mustache {{}}
-    return <Navigate to="/" state={ { from: location } } replace />;
+    return <useNavigate to="/" state={{ from: location }} replace />;
   }
 
   return children;
 }
 
 export default RequireAuth;
+
