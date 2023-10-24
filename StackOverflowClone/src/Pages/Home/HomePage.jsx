@@ -13,6 +13,18 @@ export default function HomePage() {
   const handleSearchContentClick = () => {
     navigate('/questions') // to questions page 
   }
+
+  if (!Navbar) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <CircularProgress size={40} />
+      </Box>
+    );
+  }
   return (
     <div>
        

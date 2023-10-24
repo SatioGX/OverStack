@@ -14,8 +14,8 @@ import './loginForm.css'; // Import your CSS file
 
 function LoginForm() {
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -32,9 +32,9 @@ function LoginForm() {
       if (user) {
         setTimeout(() => {
           setIsLoading(false);
-          localStorage.setItem("currentUser", JSON.stringify(user));
-          alert("User Succesfully Logged In");
-          useNavigate("/home");
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          alert('User Successfully Logged In');
+          navigate('/home');
         }, 2000);
       }
     } catch (error) {
@@ -42,7 +42,7 @@ function LoginForm() {
       alert(errorMessage);
       setIsLoading(false);
     }
-  };
+  }
 
 
   return (
