@@ -9,6 +9,7 @@ import 'primereact/resources/primereact.css';
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../firebaseconfig';
+import { getAuthErrorMessages } from "../../../utils";
 
 
 
