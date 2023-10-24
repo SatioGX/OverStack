@@ -9,26 +9,13 @@ import PasswordReset from './Pages/PasswordReset/PasswordReset';
 import CreatePost from './Pages/CreatePost/CreatePost'
 import HomePage from './pages/Home/HomePage';
 import Settings from './Pages/Settings/Settings';
-import RequireAuth from './Components/requireAuth';
-import { AuthContext } from './Components/authContext';
+
 
 
 
 function App() {
 
-  const { currentUser } = useContext(AuthContext)
-  const navigate = useNavigate()
-
-
-  //   // NOTE: console log for testing purposes
-  //console.log('User:', currentUser.email);
-
-  // // Check if currentUser exists on initial render
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/home');
-    }
-  }, [currentUser]);
+  
 
 
   return (
