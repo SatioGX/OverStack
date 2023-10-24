@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { SignOutUser, userStateListener } from "../../firebaseconfig"
+import { SignOutUser, userStateListener } from "../firebaseUser"
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 const AuthContext = createContext({
@@ -16,9 +16,9 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     // Your user state listener logic, which updates currentUser
-    userStateListener((user) => {
-      if (user) {
-        setCurrentUser(user);
+    userStateListener((User) => {
+      if (User) {
+        setCurrentUser(User);
       } else {
         setCurrentUser(null);
         navigate("/"); // Redirect to the login page when user is not authenticated

@@ -2,32 +2,32 @@
 import './App.css';
 
 import { Route,Routes } from 'react-router-dom';
-//import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./Pages/Login/Login";
 import SignUp from './Pages/Signup/Signup';
 import PasswordReset from './Pages/PasswordReset/PasswordReset';
 import CreatePost from './Pages/CreatePost/CreatePost'
 import HomePage from './pages/Home/HomePage';
 import Settings from './Pages/Settings/Settings';
-//import RequireAuth from './Components/requireAuth';
-//import { AuthContext } from './Components/authContext';
+import RequireAuth from './Components/requireAuth';
+import { AuthContext } from './Components/authContext';
 
 
 function App() {
 
-//   const { currentUser } = useContext(AuthContext)
-//   const navigate = useNavigate()
+  const { currentUser } = useContext(AuthContext)
+  const navigate = useNavigate()
 
 
-//   // NOTE: console log for testing purposes
-// console.log('User:', !!currentUser);
+  //   // NOTE: console log for testing purposes
+  console.log('User:', !!currentUser);
 
-// // Check if currentUser exists on initial render
-// useEffect(() => {
-//   if (currentUser) {
-//     navigate('/home');
-//   }
-// }, [currentUser]);
+  // // Check if currentUser exists on initial render
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/home');
+    }
+  }, [currentUser]);
 
 
   return (
@@ -37,14 +37,14 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path='/resetpassword' element={<PasswordReset />} />
-      {/* <Route path="profile" element={
-       // <RequireAuth> 
-         
-       </RequireAuth>}
-      /> */}
-      <Route path='/home' element={<HomePage />} />
+      { <Route path="profile" element={
+       <RequireAuth> 
+         <Route path='/home' element={<HomePage />} />
       <Route path='/createpost' element={<CreatePost />} />
       <Route path='/Settings' element={<Settings />} />
+       </RequireAuth>}
+      /> }
+      
     </Routes>
 
 
