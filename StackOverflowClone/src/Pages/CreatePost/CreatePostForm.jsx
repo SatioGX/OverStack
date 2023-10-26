@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-
+import { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
-
-import ReactQuill, {Quill, editor} from 'react-quill';
-
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'highlight.js/styles/vs2015.css'
 import './CreatePostForm.css';
@@ -40,16 +38,37 @@ const CreatePostForm = () => {
         <form className="wide-form" onSubmit={handleFormSubmit}>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
-                <InputText id="title" className="p-inputtext form-control" placeholder="What's your programming question? Be specific." />
+                <InputText 
+                    className="p-inputtext form-control" 
+                    id="title" 
+                    placeholder="What's your programming question? Be specific." 
+                />
             </div>
             <div className="form-group">
-                <ReactQuill value={text} onChange={handleChange} modules={modules} />
+                <label htmlFor="decription">Description</label>
+                <InputTextarea 
+                    className="p-inputtext form-control" 
+                    id="description" 
+                    placeholder="What's your programming question? Be specific." 
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="details">Details</label>
+                <ReactQuill id="details" value={text} onChange={handleChange} modules={modules} />
             </div>
             <div className="form-group">
                 <label htmlFor="tags">Tags</label>
-                <InputText id="tags" className="p-inputtext form-control" placeholder="at least one tag such as (r vb .net wordpress), max 5 tags"/>
+                <InputText 
+                    id="tags" 
+                    className="p-inputtext form-control" 
+                    placeholder="at least one tag such as (r vb .net wordpress), max 5 tags"
+                />
             </div>
-            <Button type="submit" label="Post Your Question" className="p-button p-button-primary" />
+            <Button 
+                type="submit" 
+                label="Post Your Question" 
+                className="p-button p-button-primary" 
+            />
         </form>
     );
 }

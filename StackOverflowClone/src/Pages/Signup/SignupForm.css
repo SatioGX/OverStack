@@ -9,59 +9,22 @@
  
 }
 
-/* Style the form container */
-.surface-card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  text-align: center;
-  max-width: 400px;
-   padding-bottom: 10px;
-}
-#password{
-  padding-bottom: 20px;
-  
-}
-/* Style the main heading */
-.text-900 {
-  font-weight: 900;
-  padding-bottom: 10px;
-}
-
-/* Style input labels */
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
 
 
 
-/* Style the submit button */
-.p-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
+
+
+
+
+
 .p-inputtext {
   width: 100%;
+  margin-bottom: 10px;
+  height: 40px;
 }
 /* Style anchor tags (if any) */
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
 
 
 
 
-/* Set the text color to black */
-.text-900, .text-600, .font-medium {
-  color: #000;
-}
+

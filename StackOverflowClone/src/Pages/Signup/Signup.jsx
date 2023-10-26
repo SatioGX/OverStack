@@ -1,20 +1,15 @@
-/* SignUp.js */
-import React from 'react';
-import SignUpForm from "./SignUpForm";
 import './SignUpForm.css';
-import Navbar from '../../Components/Navbar/Navbar'
+import SignupForm from "./SignupForm";
 
 function SignUp() {
   return (
-    
     <div className="signup-container">
-      <Navbar />
       <div className="signup-content">
-        
-        <SignUpForm />
+        <SignupForm />
       </div>
     </div>
   );
 }
 
 export default SignUp;
+

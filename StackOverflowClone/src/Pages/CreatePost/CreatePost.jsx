@@ -6,7 +6,7 @@ import './CreatePost.css'
 function CreatePost() {
     return (
         <div>
-            <Navbar />
+        
             <div className="container">
                 <h1>Create a New Question</h1>
                 <CreatePostForm />
