@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../Components/Navbar/Navbar';
 import WelcomeCard from '../../Components/WelcomeCard/WelcomeCard';
 import './style.css';
 
@@ -13,9 +12,21 @@ export default function HomePage() {
   const handleSearchContentClick = () => {
     navigate('/questions') // to questions page 
   }
+
+  // if (!Navbar) {
+  //   return (
+  //     <Box
+  //       display="flex"
+  //       justifyContent="center"
+  //       alignItems="center"
+  //     >
+  //       <CircularProgress size={40} />
+  //     </Box>
+  //   );
+  // }
   return (
     <div>
-        <Navbar />
+       
         <div className="card-container">
             <WelcomeCard 
               buttonText="Join Our Community" 

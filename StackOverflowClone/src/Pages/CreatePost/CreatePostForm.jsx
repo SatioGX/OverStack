@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 
-import ReactQuill, {Quill, editor} from 'react-quill';
+import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
 import 'highlight.js/styles/vs2015.css'

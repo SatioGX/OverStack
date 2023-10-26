@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { InputText } from "primereact/inputtext";
+import { signOut } from "firebase/auth";
+import { auth } from '../../../firebase.config';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
@@ -26,6 +28,15 @@ export default function Navbar() {
     navigate("/tags");
   };
 
+  const signoutUser = async () => {
+    // call Firebase for logout
+    await signOut(auth);
+    // clear localstoreage
+    localStorage.removeItem("current-user");
+    // send the user to login page
+    navigate("/");
+  };
+
   return (
     <div className='navbar-container'>
         <div onClick={handleRedirectToHome} className='navbar-logo'>
@@ -43,9 +54,8 @@ export default function Navbar() {
             </span>
         </div>
         <div className='navbar-buttons'>
-            <Button>Log in</Button>
-            <Button>Settings</Button>
-            <Button className="p-button-outlined">Sign up</Button>
+            
+            <Button  onClick={signoutUser} className="p-button-outlined">Sign out</Button>
         </div>
     </div>
   );
