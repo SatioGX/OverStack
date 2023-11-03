@@ -1,19 +1,17 @@
 import { useState } from 'react';
-
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-
 import ReactQuill from 'react-quill';
-
 import 'react-quill/dist/quill.snow.css';
 import 'highlight.js/styles/vs2015.css'
 import './CreatePostForm.css';
 
 const CreatePostForm = () => {
-    const [text,setText] = useState('');
+    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
     
-    const handleChange = (html) => {
-        setText(html);
+    const handleChangeDescription = (html) => {
+        setDescription(html);
     }
 
     const modules = {
@@ -31,7 +29,7 @@ const CreatePostForm = () => {
             ['clean']
         ]
     }
-
+    console.log(description)
     const handleFormSubmit = (e) => {
         e.preventDefault();
     };
@@ -40,10 +38,11 @@ const CreatePostForm = () => {
         <form className="wide-form" onSubmit={handleFormSubmit}>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
-                <InputText id="title" className="p-inputtext form-control" placeholder="What's your programming question? Be specific." />
+                <InputText 
+                id="title" className="p-inputtext form-control" placeholder="What's your programming question? Be specific." />
             </div>
             <div className="form-group">
-                <ReactQuill value={text} onChange={handleChange} modules={modules} />
+                <ReactQuill value={description} onChange={handleChangeDescription} modules={modules} />
             </div>
             <div className="form-group">
                 <label htmlFor="tags">Tags</label>
