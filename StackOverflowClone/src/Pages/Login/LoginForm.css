@@ -3,7 +3,7 @@
 
 .surface-card {
   max-width: 500px !important;
-  height: 600px; /* Set to 'auto' to allow content to dictate height */
+  max-height: 600px; /* Set to 'auto' to allow content to dictate height */
   display: flex; /* Add this line to center content vertically */
   flex-direction: column; /* Add this line to center content vertically */
   justify-content: center; /* Center content horizontally */

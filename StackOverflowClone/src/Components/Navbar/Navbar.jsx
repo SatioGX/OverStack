@@ -31,9 +31,6 @@ export default function Navbar() {
   const signoutUser = async () => {
     // call Firebase for logout
     await signOut(auth);
-    // clear localstoreage
-    localStorage.removeItem("current-user");
-    // send the user to login page
     navigate("/");
   };
 
