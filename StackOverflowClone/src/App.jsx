@@ -60,7 +60,7 @@ function App() {
         <Route path='/resetpassword' element={<PasswordReset />} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/createpost' element={<CreatePost />} />
-        <Route path='/Settings' element={<Settings />} />
+        <Route path='/settings' element={<Settings />} />
       </Routes>
     </div>
 
