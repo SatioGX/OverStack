@@ -10,8 +10,11 @@ import CreatePost from './Pages/CreatePost/CreatePost'
 import HomePage from './pages/Home/HomePage';
 import Settings from './Pages/Settings/Settings';
 import Navbar from './Components/Navbar/Navbar'
-
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import 'primeflex/primeflex.css';
 import { auth } from '../firebase.config';
+import QuestionsPage from './Pages/Questions/QuestionsPage';
 
 
 
@@ -36,7 +39,7 @@ function App() {
           navigate("/signup");
         }
     
-        if (!user || location,pathname === "/resetpassword") {
+        if (!user || location.pathname === "/resetpassword") {
           navigate("/resetpassword")
         }
 
@@ -61,6 +64,7 @@ function App() {
         <Route path='/home' element={<HomePage />} />
         <Route path='/createpost' element={<CreatePost />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/questions' element={<QuestionsPage />} />
       </Routes>
     </div>
 
