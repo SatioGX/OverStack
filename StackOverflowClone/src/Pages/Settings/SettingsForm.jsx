@@ -18,6 +18,7 @@ function SettingsForm() {
 
   const handleSettings = (event) => {
     event.preventDefault();
+
     setIsLoading(true);
     console.log("Settings Updated:", settingsData);
   };
@@ -37,6 +38,7 @@ function SettingsForm() {
       alert(errorMessage);
   });
   
+
 
   return (
     <div>
