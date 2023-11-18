@@ -4,7 +4,7 @@ import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import 'primereact/resources/primereact.css';
-
+import { getAuth, updateProfile } from "firebase/auth";
 import './SettingsForm.css'; // Import your CSS file
 
 function SettingsForm() {
@@ -19,10 +19,26 @@ function SettingsForm() {
   const handleSettings = (event) => {
     event.preventDefault();
 
-    // You can perform logic here to update the settings, for example:
+    setIsLoading(true);
     console.log("Settings Updated:", settingsData);
-    // Add code to update settings in the backend or any other necessary action
   };
+
+
+  const auth = getAuth();
+  updateProfile(auth.currentUser, {
+    displayName: auth.name,
+    bio: auth.bio,
+    posts: auth.posts,
+    achievements: auth.achievements,
+    repos: auth.repos
+  }).then(() => {
+    alert("User Succesfully Loaded");
+  }).catch((error) => {
+    const errorMessage = getAuthErrorMessages(error.code);
+      alert(errorMessage);
+  });
+  
+
 
   return (
     <div>
