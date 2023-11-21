@@ -2,15 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from 'primereact/button';
 import { Chips } from 'primereact/chips';
 import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
 import { Toast } from 'primereact/toast';
 import ReactQuill from 'react-quill';
 import { Timestamp, addDoc, collection } from 'firebase/firestore';
-import { db } from '../../../firebase.config';
+import { auth, db } from '../../../firebase.config';
 import 'react-quill/dist/quill.snow.css';
 import 'highlight.js/styles/vs2015.css'
 import './CreatePostForm.css';
 
 const CreatePostForm = () => {
+    const [description, setDescription] = useState('');
     const [details, setDetails] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [notification, setNotification] = useState({
@@ -23,12 +25,12 @@ const CreatePostForm = () => {
     const [title, setTitle] = useState('');
     const toast = useRef(null);
     const postCollection = collection(db, 'posts');
-
+    
     useEffect(() => {
         if(notification.on) {
             toastShow();
         }
-    }, [notification.on])
+    }, [notification])
     
     const modules = {
         syntax: true,
@@ -57,16 +59,46 @@ const CreatePostForm = () => {
     const handleChangeTitle = (e) => {
         setTitle(e.target.value);
     }
+    const handleChangeDescription = (e) => {
+        setDescription(e.target.value);
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        if(title.length === 0 || 
+            description.length === 0 || 
+            details.length === 0 || 
+            tags.length === 0
+        ) {
+            setNotification({
+                on: true,
+                type: 'error',
+                summary: 'Error',
+                message: "Please fill out all blanks"
+            })
+            setIsLoading(false);
+            return;
+        }
+        if(tags.length > 5) {
+            setNotification({
+                on: true,
+                type: 'error',
+                summary: 'Error',
+                message: "5 tags maximum"
+            })
+            setIsLoading(false);
+            return;
+        }
         const data = {
+            answer: 0,
+            description,
             details, 
             tags,
             title,
             createdAt: Timestamp.fromDate(new Date()),
-            userRef: 'userId' // should be JSON.parse(localStorage.getItem(currentUser)).docId 
+            votes: 0,
+            userRef: auth.currentUser.uid
         }
         try {
             await addDoc(postCollection, data);
@@ -78,6 +110,7 @@ const CreatePostForm = () => {
             })
             setTitle('');
             setDetails('');
+            setDescription('');
             setTags([]);
             setIsLoading(false);
         } catch(error) {
@@ -115,13 +148,23 @@ const CreatePostForm = () => {
                 />
             </div>
             <div className="form-group">
+                <label htmlFor="decription">Description</label>
+                <InputTextarea 
+                    className="p-inputtext form-control" 
+                    id="description" 
+                    value={description}
+                    onChange={handleChangeDescription}
+                    placeholder="Describe your problem here." 
+                />
+            </div>
+            <div className="form-group">
                 <label htmlFor="detail">Details</label>
                 <ReactQuill value={details} onChange={handleChangeDetails} modules={modules} />
             </div>
             <div className="card p-fluid form-group">
                 <label htmlFor="tags">Tags</label>
                 <Chips 
-                    placeholder="Press Enter to separate tag"
+                    placeholder="Press Enter to separate tag (Add at least 1 tag, and maximum 5 tags)"
                     value={tags} 
                     onChange={handleChangeTags} 
                 />
