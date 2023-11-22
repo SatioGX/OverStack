@@ -1,0 +1,6 @@
+@import "primeicons/primeicons.css";
+@import 'primeflex/primeflex.css';
+.icon {
+    font-size: 1rem; 
+    border-radius: 20px; 
+}

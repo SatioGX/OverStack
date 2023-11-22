@@ -5,13 +5,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
- 
+
+
 }
 
 
 
 
+.surface-card {
+  max-width: 500px !important;
+  max-height: 830px !important; 
+  display: flex; /* Add this line to center content vertically */
+  flex-direction: column; /* Add this line to center content vertically */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+
+  
+}
 
 
 
@@ -22,7 +32,76 @@
   margin-bottom: 10px;
   height: 40px;
 }
-/* Style anchor tags (if any) */
+
+
+
+
+
+div {
+  padding-bottom: 10px !important;
+}
+
+
+
+.flex{
+  padding: 50px;
+  
+}
+.text-900 {
+  font-weight: 900;
+
+}
+
+
+
+.w-full {
+  width: 100% !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+/* Add more styles as needed */
+
+/* Style the submit button */
+.p-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Style the link for "Create today!" and "Forgot your password?" */
+a {
+  color: #007bff !important;
+  text-decoration: none;
+}
+
+Link:hover {
+  text-decoration: underline;
+}
+
+/* Style the checkbox */
+.p-checkbox-box {
+  border: 1px solid #007bff;
+}
+
+/* Style the "Remember me" label */
+.p-checkbox-label {
+  margin-left: 5px;
+  
+}
+
+/* Style the logo */
+.logo {
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.text-900, .text-600, .font-medium {
+  color: #000; /* Black color */
+}
 
 
 
