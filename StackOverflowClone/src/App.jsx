@@ -3,7 +3,7 @@ import './App.css';
 
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Login from './pages/Login/Login';
+import Login from "./Pages/Login/Login";
 import SignUp from './Pages/Signup/Signup';
 import PasswordReset from './Pages/PasswordReset/PasswordReset';
 import CreatePost from './Pages/CreatePost/CreatePost'

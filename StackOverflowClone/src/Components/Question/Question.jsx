@@ -51,7 +51,10 @@ export default function Question({ questionData }) {
                 }
             </div>
             <div className="col-4 flex p-0 m-0 gap-2 justify-content-end">
-                <img src="https://cdn.pixabay.com/photo/2018/09/14/23/28/avatar-3678347_1280.png" className="avatar w-1rem" />
+                <img 
+                    className="avatar w-1rem" 
+                    src={questionData.avatar ? questionData.avatar : "https://cdn.pixabay.com/photo/2018/09/14/23/28/avatar-3678347_1280.png"} 
+                />
                 <h6 className="text-sm font-bold">{authorName}</h6>
                 <h6 className="text-sm">asked {date.fromNow()}</h6>
             </div>
