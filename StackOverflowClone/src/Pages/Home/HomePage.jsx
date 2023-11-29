@@ -1,49 +1,70 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react'
 import WelcomeCard from '../../Components/WelcomeCard/WelcomeCard';
+import { auth, db } from '../../../firebase.config';
+import { doc, getDoc } from 'firebase/firestore';
 import './style.css';
+import { AuthContext } from '../../App';
 
-export default function HomePage() {
+const HomePage = () => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [questionsAsked, setQuestionsAsked] = useState(0);
+  const [questionsAnswered, setAnswers] = useState(0)
+  const userData = useContext(AuthContext);
+  console.log(userData);
+  const user = auth.currentUser;
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
 
-  const handleJoinCommunityClick = () => {
-    navigate('/signup')
-  }
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setUserName(userData.userName || '');
+            setQuestionsAsked(userData.questionsAsked || 0);
+            setAnswers(userData.questionsAnswered || 0)
+          } else {
+            // Handle case where user data doesn't exist
+            console.log('User data not found');
+          }
+        } catch (error) {
+          // Handle any errors that occur during data retrieval
+          console.error('Error fetching user data:', error);
+        }
+      }
+    };
 
-  const handleSearchContentClick = () => {
-    navigate('/questions') // to questions page 
-  }
-
-  // if (!Navbar) {
-  //   return (
-  //     <Box
-  //       display="flex"
-  //       justifyContent="center"
-  //       alignItems="center"
-  //     >
-  //       <CircularProgress size={40} />
-  //     </Box>
-  //   );
-  // }
+    fetchUserData();
+  }, [user]);
+ 
   return (
     <div>
        
-        <div className="card-container">
-            <WelcomeCard 
-              buttonText="Join Our Community" 
-              buttonType="primary" 
-              handleButtonClick={handleJoinCommunityClick}
-              icon="pi pi-user"
-              message="Discover the optimal solution to your technical query while assisting others in resolving their own."
-            />
-            <WelcomeCard 
-              buttonText="Search Contents" 
-              buttonType="info" 
-              handleButtonClick={handleSearchContentClick}
-              icon="pi pi-search"
-              isOutlined={true} 
-              message="You are getting stuck at somewhere in your code ? Feel free to find answers and ask question" 
-            />
-        </div>
+       <div className="card-container">
+        <WelcomeCard
+          icon="pi pi-user"
+          buttonText="Update User"
+          buttonType="Primary"
+          handleButtonClick={() => navigate('/settings')}
+          message={`Welcome, ${userName}`}
+          isOutlined={true}
+        />
+        <WelcomeCard
+          buttonText="Search Contents"
+          buttonType="info"
+          handleButtonClick={() => navigate('/questions')}
+          icon="pi pi-search"
+          isOutlined={true}
+          message="You are getting stuck at somewhere in your code? Feel free to find answers and ask questions."
+        />
+        <WelcomeCard
+          icon="pi pi-search"
+          isOutlined={true}
+          message={`Questions Asked: ${questionsAsked}\nQuestions Answered: ${questionsAnswered}`}
+        />
+      </div>
     </div>
   )
 }
