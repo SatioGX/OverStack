@@ -15,6 +15,7 @@ const HomePage = () => {
   console.log(userData);
   const user = auth.currentUser;
   useEffect(() => {
+    
     const fetchUserData = async () => {
       if (user) {
         try {
@@ -24,7 +25,7 @@ const HomePage = () => {
             const userData = userDoc.data();
             setUserName(userData.userName || '');
             setQuestionsAsked(userData.questionsAsked || 0);
-            setAnswers(userData.questionsAnswered || 0)
+            setAnswers(userData.answers || 0)
           } else {
             // Handle case where user data doesn't exist
             console.log('User data not found');
@@ -34,9 +35,12 @@ const HomePage = () => {
           console.error('Error fetching user data:', error);
         }
       }
+      
     };
-
+    if(user.uid){
+    
     fetchUserData();
+    }
   }, [user]);
  
   return (
