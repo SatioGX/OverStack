@@ -52,7 +52,9 @@ function SignUp() {
       
       await addDoc(userReference, {
         userName: registerData.userName,
-        id: data.user.uid
+        id: data.user.uid,
+        questionsAsked: 0,
+        answers: 0
       });
         alert('Succesfully Registered');
         navigate('/');
