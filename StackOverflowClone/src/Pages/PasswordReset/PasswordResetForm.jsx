@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
+//import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 import { Button } from 'primereact/button';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -11,7 +12,17 @@ function PasswordResetForm() {
   const [email, setEmail] = useState('');
 
   const handlePasswordReset = () => {
-    // Implement your password reset logic here
+   //const auth = getAuth();
+    //sendPasswordResetEmail(auth, email)
+        //.then(() => {
+    // Alert(Password reset email sent!)
+    // ..
+  //})
+  //.catch((error) => {
+    //const errorCode = error.code;
+    //const errorMessage = error.message;
+    // ..
+  });
   };
 
   return (
