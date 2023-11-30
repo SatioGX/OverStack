@@ -8,9 +8,10 @@ import { getAuth, updateProfile } from "firebase/auth";
 import './SettingsForm.css'; // Import your CSS file
 import { AuthContext } from '../../App';
 import useUploadFile from '../../hooks/useUploadFile';
-import { collection, getDocs, query, where } from '@firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { db } from '../../../firebase.config';
 import { ProgressSpinner } from 'primereact/progressspinner';
+
 
 
 function SettingsForm() {
@@ -18,16 +19,20 @@ function SettingsForm() {
   const userdata = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState();
-  const {
-    allowUploadImage,
-    allowUploadImageURL,
-    imageFile,
-    imageURL,
-    imageProgress,
-    handleFileInputChange,
-    setImageURL
-  } = useUploadFile('',  )
+  const [allQuestions, setAllQuestions] = useState([]);
+  const questionsCollection = collection(db, 'posts');
+
+  // const {
+  //   allowUploadImage,
+  //   allowUploadImageURL,
+  //   imageFile,
+  //   imageURL,
+  //   imageProgress,
+  //   handleFileInputChange,
+  //   setImageURL
+  // } = useUploadFile('',  )
   const usersCollection = collection(db, 'users');
+
   const handleSettings = (event) => {
     event.preventDefault();
 
@@ -37,8 +42,9 @@ function SettingsForm() {
 
   useEffect(() => {
     if(userdata.uid) {
-      fetchUserData();
+      fetchUserData()
     }
+
   }, [userdata.uid]);
 
   const fetchUserData = async () => {
@@ -58,12 +64,38 @@ function SettingsForm() {
         imageLink: data.imageLink
       });
       setIsLoading(false);
+      if(userdata.uid){
+        console.log(userdata.uid)
+        fetchRecentPost()
+      }
     } catch(error) {
       setIsLoading(false);
       console.log(error);
     }
   }
-  
+
+  const fetchRecentPost = async () =>{
+    setIsLoading(true);
+    try{
+      const newQuestions = [];
+      const postQuery = query(questionsCollection, where('userRef', '==', userdata.uid));
+      const postSnapshot = await getDocs(postQuery);
+      let data;
+      console.log(data)
+      setIsLoading(false);
+      postSnapshot.forEach((doc) => {
+        data = doc.data();
+        newQuestions.push(data);
+        console.log(data)
+        setAllQuestions(newQuestions);
+        setIsLoading(false);
+      });
+    }catch(error){
+      setIsLoading(false);
+      console.log(error);
+    }
+  }
+
   if(isLoading) {
     return (
       <div className="flex flex-column gap-2 align-items-center">
@@ -73,6 +105,7 @@ function SettingsForm() {
     )
   }
   console.log(userInfo)
+  console.log(userdata);
   return (
     <div>
     <h1>Account Settings</h1>
@@ -83,71 +116,61 @@ function SettingsForm() {
     <InputText
       id="name"
       type="text"
-      className="w-full"
+      className="w-full read-only"
       value={userInfo.name}
     />
   </div>
   </label>
 
-
-
         <div className = "flex-container">
         <div className="flex-rectangle"></div>
-        <div className= "flex-col" > 
-            <label className= "flex-activity">Recent Activities</label>
-            <InputText
-            id="activity"
-            type="text"
-            className="read-only"
-          />
+        <div className= "flex-col" >
+
+  <label className="flex-activity">Recent Post</label>
+  <InputText
+    id="activity"
+    type="text"
+    className="read-only"
+    value={`${allQuestions[0].title} ${allQuestions[0].description}`}
+  />
+
+
         </div>
         </div>
 
 
         <div className = "flex-container">
             <div className = "flex-panel margins">
-                <label >Bio:</label>
+                <label >Questions Answered:</label>
                 <InputText
-            id="bio"
-            type="text"
-            placeholder="bio here"
-
-            className="read-only"
-          />
-            </div>
-
-            <div className= "flex-panel margins">
-                <label>Posts</label>
-                <InputText
-            id="posts"
-            type="text"
-            placeholder="posts here"
-
-            className="read-only"
-          />
+                id="name"
+                type="text"
+                className="read-only"
+                value={userInfo.answers}
+                />
             </div>
 
 
             <div className= "flex-panel margins">
-                <label htmlFor="aboutMe">Achievements</label>
+                <label htmlFor="aboutMe">Questions Asked</label>
                 <InputText
-            id="achievements"
-            type="text"
-            placeholder="achievements here"
-            className="read-only"
-          />
+                id="name"
+                type="text"
+                className="read-only"
+                value={userInfo.questionAsked}
+                />
             </div>
         </div>
- 
-        <div>
-            <label>Repos</label>
+
+        {/* <div>
+            <label>All Posts</label>
             <InputText
             id="repos"
             type="text"
-            placeholder="repos here"
+            placeholder="Will Change"
             className="large-read-only"
           />
-        </div>
+        </div> */}
         <div>
                 <button className= "button">Save</button>
         </div>
