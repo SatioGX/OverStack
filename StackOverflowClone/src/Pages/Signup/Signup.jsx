@@ -56,8 +56,8 @@ function SignUp() {
         questionsAsked: 0,
         answers: 0
       });
-        alert('Succesfully Registered');
-        navigate('/');
+      setShowNotificationMessage('Succesfully Registered');
+      navigate('/');
     }
   };
 

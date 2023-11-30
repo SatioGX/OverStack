@@ -44,24 +44,24 @@ function SettingsForm() {
 
 
 
-        <div class = "flex-container">
-        <div class="flex-rectangle"></div>
-        <div class = "flex-col" > 
-            <label class = "flex-activity">Recent Activities</label>
+        <div className = "flex-container">
+        <div className="flex-rectangle"></div>
+        <div className = "flex-col" > 
+            <label className = "flex-activity">Recent Activities</label>
             <InputText
             id="activity"
             type="text"
             placeholder="Recent activity here"
             value={settingsData.activity}
             onChange={(event) => setSettingsData({ ...settingsData, activity: event.target.value })}
-            class="read-only"
+            className="read-only"
           />
         </div>
         </div>
 
 
-        <div class = "flex-container">
-            <div class = "flex-panel margins">
+        <div className = "flex-container">
+            <div className = "flex-panel margins">
                 <label >Bio:</label>
                 <InputText
             id="bio"
@@ -69,11 +69,11 @@ function SettingsForm() {
             placeholder="bio here"
             value={settingsData.bio}
             onChange={(event) => setSettingsData({ ...settingsData, bio: event.target.value })}
-            class="read-only"
+            className="read-only"
           />
             </div>
 
-            <div class = "flex-panel margins">
+            <div className = "flex-panel margins">
                 <label>Posts</label>
                 <InputText
             id="posts"
@@ -81,12 +81,12 @@ function SettingsForm() {
             placeholder="posts here"
             value={settingsData.bio}
             onChange={(event) => setSettingsData({ ...settingsData, post: event.target.value })}
-            class="read-only"
+            className="read-only"
           />
             </div>
 
 
-            <div class = "flex-panel margins">
+            <div className = "flex-panel margins">
                 <label htmlFor="aboutMe">Achievements</label>
                 <InputText
             id="achievements"
@@ -94,7 +94,7 @@ function SettingsForm() {
             placeholder="achievements here"
             value={settingsData.bio}
             onChange={(event) => setSettingsData({ ...settingsData, achievements: event.target.value })}
-            class="read-only"
+            className="read-only"
           />
             </div>
         </div>
@@ -107,11 +107,11 @@ function SettingsForm() {
             placeholder="repos here"
             value={settingsData.bio}
             onChange={(event) => setSettingsData({ ...settingsData, repos: event.target.value })}
-            class="large-read-only"
+            className="large-read-only"
           />
         </div>
         <div>
-                <button class = "button">Save</button>
+                <button className = "button">Save</button>
         </div>
     </form>
     </div>
