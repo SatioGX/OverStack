@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react'
 import WelcomeCard from '../../Components/WelcomeCard/WelcomeCard';
 import { auth, db } from '../../../firebase.config';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDocs, query, where, collection } from 'firebase/firestore';
 import './style.css';
 import { AuthContext } from '../../App';
 
@@ -12,36 +12,36 @@ const HomePage = () => {
   const [questionsAsked, setQuestionsAsked] = useState(0);
   const [questionsAnswered, setAnswers] = useState(0)
   const userData = useContext(AuthContext);
-  console.log(userData);
-  const user = auth.currentUser;
+  const user = userData;
+  const usersCollection = collection(db, 'users');
   useEffect(() => {
     
-    const fetchUserData = async () => {
-      if (user) {
-        try {
-          const userDoc = await getDoc(doc(db, 'users', user.uid));
-
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            setUserName(userData.userName || '');
-            setQuestionsAsked(userData.questionsAsked || 0);
-            setAnswers(userData.answers || 0)
-          } else {
-            // Handle case where user data doesn't exist
-            console.log('User data not found');
-          }
-        } catch (error) {
-          // Handle any errors that occur during data retrieval
-          console.error('Error fetching user data:', error);
-        }
-      }
-      
-    };
     if(user.uid){
-    
-    fetchUserData();
+      fetchUserData();
     }
-  }, [user]);
+  }, [user.uid]);
+
+  const fetchUserData = async () => {
+    if (user) {
+      try {
+        const userQuery = query(usersCollection, where('id', '==', user.uid));
+        const userSnapshot = await getDocs(userQuery)
+        let data;
+        userSnapshot.forEach((doc) => {
+          data = doc.data()
+        })
+
+
+        setUserName(data.userName || '');
+        setQuestionsAsked(data.questionsAsked || 0);
+        setAnswers(data.answers || 0)
+
+      } catch (error) {
+        // Handle any errors that occur during data retrieval
+        console.error('Error fetching user data:', error);
+      }
+    }
+  }
  
   return (
     <div>
@@ -56,7 +56,7 @@ const HomePage = () => {
           isOutlined={true}
         />
         <WelcomeCard
-          buttonText="Search Contents"
+          buttonText="Search Questions"
           buttonType="info"
           handleButtonClick={() => navigate('/questions')}
           icon="pi pi-search"
@@ -67,8 +67,12 @@ const HomePage = () => {
           icon="pi pi-search"
           isOutlined={true}
           message={`Questions Asked: ${questionsAsked}\nQuestions Answered: ${questionsAnswered}`}
+          buttonType="info"
+          handleButtonClick={() => navigate('/questions')}
+          buttonText=' '
         />
       </div>
     </div>
   )
 }
+export default HomePage;

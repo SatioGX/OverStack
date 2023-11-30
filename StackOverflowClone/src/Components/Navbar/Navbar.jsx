@@ -17,16 +17,13 @@ export default function Navbar() {
   };
 
   const handleRedirectToAbout = () => {
-    navigate("/about");
+    navigate("/settings");
   };
 
   const handleRedirectToQuestions = () => {
     navigate("/questions");
   };
 
-  const handleRedirectToTags = () => {
-    navigate("/tags");
-  };
 
   const signoutUser = async () => {
     // call Firebase for logout
@@ -40,9 +37,9 @@ export default function Navbar() {
             <Image src='https://www.xda-developers.com/files/2017/05/stack-overflow.png' width='200px' />
         </div>
         <div className='navbar-links'>
-            <Button onClick={handleRedirectToAbout} link>About</Button>
+            <Button onClick={handleRedirectToAbout} link>Settings</Button>
             <Button onClick={handleRedirectToQuestions}  link>Questions</Button>
-            <Button onClick={handleRedirectToTags}  link>Tags</Button>
+           
         </div>
         <div className='navbar-searchBar'>
             <span className="p-input-icon-left">
