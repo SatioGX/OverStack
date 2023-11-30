@@ -42,12 +42,15 @@ function Login() {
         loginData.password
       );
       if (data) {
-        alert("Succesfully Logged In");
+        setShowNotification(true);
+        setShowNotificationMessage("Succesfully Logged In");
         navigate("/home");
       }
     } catch (error) {
       setShowNotification(true);
-      setShowNotificationMessage(error.code);
+      const errorCode= error.code
+      const errormessage = error.message
+      setShowNotificationMessage(errormessage);
     }
   };
 
