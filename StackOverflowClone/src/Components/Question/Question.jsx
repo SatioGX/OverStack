@@ -3,14 +3,14 @@ import { Tag } from 'primereact/tag'
 import './style.css'
 import moment from 'moment/moment'
 import { collection, getDocs, query, where } from '@firebase/firestore';
-import { auth, db } from '../../../firebase.config';
+import { db } from '../../../firebase.config';
 import { useEffect, useState } from 'react';
 
 export default function Question({ questionData }) {
     const [authorName, setAuthorName] = useState('');
     let date = moment(questionData.createdAt.toDate());
     const usersCollection = collection(db, 'users');
-    const userQuery = query(usersCollection, where('id', '==', auth.currentUser.uid));
+    const userQuery = query(usersCollection, where('id', '==', questionData.userRef));
 
     useEffect(() => {
         fetchAuthorInfo();

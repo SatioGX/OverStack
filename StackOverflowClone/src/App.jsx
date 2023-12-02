@@ -18,9 +18,7 @@ import QuestionsPage from './Pages/Questions/QuestionsPage';
 
 export const AuthContext = createContext();
 
-
 function App() {
-
   const navigate= useNavigate();
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -52,9 +50,6 @@ function App() {
     });
   }, []);
 
- 
-
-
   return (
     <div>
       {isAuthenticated && <Navbar data={isAuthenticated} />}
@@ -70,7 +65,6 @@ function App() {
         </Routes>
       </AuthContext.Provider>
     </div>
-
   );
 }
 
