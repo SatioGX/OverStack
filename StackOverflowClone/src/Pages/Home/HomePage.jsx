@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react'
 import WelcomeCard from '../../Components/WelcomeCard/WelcomeCard';
-import { auth, db } from '../../../firebase.config';
-import { doc, getDocs, query, where, collection } from 'firebase/firestore';
+import { db } from '../../../firebase.config';
+import { getDocs, query, where, collection } from 'firebase/firestore';
 import './style.css';
 import { AuthContext } from '../../App';
 

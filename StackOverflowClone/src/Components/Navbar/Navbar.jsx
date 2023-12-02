@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import { InputText } from "primereact/inputtext";
 import { signOut } from "firebase/auth";
 import { auth } from '../../../firebase.config';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -11,7 +10,6 @@ import "./style.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
-
   const handleRedirectToHome = () => {
     navigate("/home");
   };
@@ -40,12 +38,6 @@ export default function Navbar() {
             <Button onClick={handleRedirectToAbout} link>Settings</Button>
             <Button onClick={handleRedirectToQuestions}  link>Questions</Button>
            
-        </div>
-        <div className='navbar-searchBar'>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText placeholder="Search" className="w-full" />
-            </span>
         </div>
         <div className='navbar-buttons'>
             
