@@ -63,6 +63,10 @@ const CreatePostForm = () => {
         setDescription(e.target.value);
     }
 
+    const generatePostId = () => {
+        return Math.floor(Math.random() * (1000000000 - 1)) + 1;
+    }
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -91,6 +95,7 @@ const CreatePostForm = () => {
             return;
         }
         const data = {
+            postId: generatePostId(),
             answer: 0,
             description,
             details, 

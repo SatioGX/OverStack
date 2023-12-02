@@ -79,7 +79,7 @@ export default function QuestionsPage() {
         newQuestions.push(data);
       })
       setAllQuestions(newQuestions);
-      setTempQuestions(allQuestions);
+      setTempQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {
       console.log(error);
@@ -98,7 +98,7 @@ export default function QuestionsPage() {
         newQuestions.push(data);
       })
       setAllQuestions(newQuestions);
-      setTempQuestions(allQuestions);
+      setTempQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {
       console.log(error);
@@ -116,7 +116,7 @@ export default function QuestionsPage() {
         const data = doc.data();
         newQuestions.push(data);
       })
-      setTempQuestions(allQuestions);
+      setTempQuestions(newQuestions);
       setAllQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {

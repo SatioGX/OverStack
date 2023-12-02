@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 export default function Question({ questionData }) {
     const [authorName, setAuthorName] = useState('');
+
     let date = moment(questionData.createdAt.toDate());
     const usersCollection = collection(db, 'users');
     const userQuery = query(usersCollection, where('id', '==', questionData.userRef));
@@ -34,7 +35,7 @@ export default function Question({ questionData }) {
             <h6 className="text-sm m-0">{questionData.answers} answers</h6>
         </div>
         <div className="col-11 flex flex-column p-0 m-0 gap-4 align-items-start">
-            <h4 className="text-left font-bold m-0 p-0">{questionData.title}</h4>
+            <h4 className="text-left font-bold m-0 p-0"><a href={`/question/${questionData.postId == undefined ? 1 : questionData.postId}`}>{questionData.title}</a></h4>
             <p dangerouslySetInnerHTML={{__html: `${questionData.description.slice(0, 150)}`}} className="text-sm m-0"/>
         </div>
         <div className="col-1 p-0 m-0"></div>
