@@ -23,17 +23,20 @@ export default function QuestionPage() {
     const [ currentComments, setCurrentComments ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
     const [ isPostAuthor, setIsPostAuthor ] = useState(false);
-    const [ isPostAnswer, setIsPostAnswer ] = useState(false);
+    const [ isPostAnswered, setIsPostAnswered ] = useState(false);
+    const [ postAnswer, setPostAnswer ] = useState("");
 
     const questionsCollection = collection(db, 'posts');
     const usersCollection = collection(db, 'users');
     const commentsCollection = collection(db, 'comments');
 
-    const setAsAnswer = (ref) => {
-        console.log(ref);
+    const isPostAnswer = (ref) => {
+        return currentComments.some((comment) => comment.commentId === ref && comment.isAnswer === true);
+    }
 
+    const setAsAnswer = (ref) => {
         setCommentAsAnswerByRef(ref);
-        setIsPostAnswer(true);
+        setIsPostAnswered(true);
     }
 
     const handleCommentChange = (value) => {
@@ -154,7 +157,7 @@ export default function QuestionPage() {
             });
 
             setCurrentComments(comments);
-            setIsPostAnswer(comments.some((comment) => comment.isAnswer === true));
+            setIsPostAnswered(comments.some((comment) => comment.isAnswer === true));
             setIsLoading(false);
         } catch (error) {
             console.error(error);
@@ -203,7 +206,7 @@ export default function QuestionPage() {
                     <Panel>
                         {currentComments.map((comment) => (
                             <div key={comment.commentId} className="p-mb-2">
-                                { isPostAnswer ? (
+                                { isPostAnswer(comment.commentId) ? (
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <p style={{ margin: 0, marginRight: '10px' }}>{comment.commentId} (ANSWER)</p>
                                         <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
@@ -212,7 +215,7 @@ export default function QuestionPage() {
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <p style={{ margin: 0, marginRight: '10px' }}>{comment.commentId}</p>
                                         <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
-                                        { isPostAuthor && <Button onClick={() => setAsAnswer(comment.commentId)} style={{marginLeft: '10px'}}>Mark as Answer</Button> }
+                                        { isPostAuthor && <Button onClick={() => setAsAnswer(comment.commentId)} disabled={isPostAnswered} style={{marginLeft: '10px'}}>Mark as Answer</Button> }
                                     </div>
                                 )}
                             </div>
@@ -229,7 +232,7 @@ export default function QuestionPage() {
                                 style={{ height: '300px' }}
                             />
                         </div>
-                        <Button label="Post Your Answer" onClick={handleSubmitComment} disabled={{isPostAnswer}} />
+                        <Button label="Post Your Answer" onClick={handleSubmitComment} disabled={isPostAnswered} />
                     </div>
                 </div>
             </div>
