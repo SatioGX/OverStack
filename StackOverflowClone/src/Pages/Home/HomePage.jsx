@@ -14,6 +14,8 @@ const HomePage = () => {
   const userData = useContext(AuthContext);
   const user = userData;
   const usersCollection = collection(db, 'users');
+  const questionsCollection = collection(db, 'posts');
+  const answerCollection = collection(db, 'answers')
   useEffect(() => {
     
     if(user.uid){
@@ -30,16 +32,41 @@ const HomePage = () => {
         userSnapshot.forEach((doc) => {
           data = doc.data()
         })
-
-
         setUserName(data.userName || '');
-        setQuestionsAsked(data.questionsAsked || 0);
-        setAnswers(data.answers || 0)
 
+        fetchQuestionNumber();
+        fetchAnswerNumber();
+       
       } catch (error) {
         // Handle any errors that occur during data retrieval
         console.error('Error fetching user data:', error);
       }
+    }
+  }
+
+  const fetchQuestionNumber = async () => {
+    
+    try {
+      const questionQuery = query(questionsCollection,  where('userRef', '==', user.uid))
+      const questionSnapshot = await getDocs(questionQuery);
+      const numberOfDocuments = questionSnapshot.size;
+      setQuestionsAsked(numberOfDocuments|| 0);
+    } catch(error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }
+
+  const fetchAnswerNumber = async () => {
+    
+    try {
+      const answerQuery = query(answerCollection,  where('userRef', '==', user.uid))
+      const answerSnapshot = await getDocs(answerQuery);
+      const numberOfDocuments = answerSnapshot.size;
+      setAnswers(numberOfDocuments|| 0);
+    } catch(error) {
+      console.log(error);
+      setIsLoading(false);
     }
   }
  
