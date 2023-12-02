@@ -32,7 +32,7 @@ export default function Question({ questionData }) {
     <div className="grid w-full p-0 m-0">
         <div className="col-1 flex flex-column p-0 m-0 gap-4 align-items-start">
             <h6 className="text-sm m-0">{questionData.votes} votes</h6>
-            <h6 className="text-sm m-0">{questionData.answers} answers</h6>
+            <h6 className="text-sm m-0">{questionData.postClosed ? 'answered' : '0 answer' } </h6>
         </div>
         <div className="col-11 flex flex-column p-0 m-0 gap-4 align-items-start">
             <h4 className="text-left font-bold m-0 p-0"><a href={`/question/${questionData.postId == undefined ? 1 : questionData.postId}`}>{questionData.title}</a></h4>

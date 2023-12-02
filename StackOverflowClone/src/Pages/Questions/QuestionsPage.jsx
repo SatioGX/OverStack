@@ -91,9 +91,11 @@ export default function QuestionsPage() {
     setIsLoading(true);
     try {
       const newQuestions = [];
-      const questionQuery = query(questionsCollection, where('answers', '==', 0));
+      const questionQuery = query(collection(db, 'posts'), where('postClosed', '==', false));
+      console.log(questionQuery), "Query";
       const questionSnapshot = await getDocs(questionQuery);
-      questionSnapshot.docs.forEach((doc) => {
+      console.log(questionSnapshot);
+        questionSnapshot.docs.forEach((doc) => {
         const data = doc.data();
         newQuestions.push(data);
       })
@@ -156,7 +158,6 @@ export default function QuestionsPage() {
       </div>
     )
   }
-  
   return (
     <div className="flex flex-column gap-2 px-8 mt-2 align-items-start">
       <div className="flex w-full justify-content-between px-8 py-0">
