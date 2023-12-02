@@ -141,7 +141,7 @@ function SettingsForm() {
           <textarea
             id="activity"
             className="read-only"
-            // value={`${allQuestions[0].title}\n${allQuestions[0].description}\n${allQuestions[0].details}\n${"Tags: " + allQuestions[0].tags}\n${"Date Posted: " + allQuestions[0].createdAt.toDate().toDateString()}`}
+            value={`${allQuestions[0].title}\n${allQuestions[0].description}\n${"Tags: " + allQuestions[0].tags}\n${"Date Posted: " + allQuestions[0].createdAt.toDate().toDateString()}`}
             readOnly
           />
         </div>
