@@ -1,4 +1,4 @@
-/* Reset default browser styles */
+
 body, h1, h2, h3, p, ul, ol, li, input, button {
     margin: 0;
     padding: 0;
@@ -20,7 +20,6 @@ h1, h2, h3 {
     color: #333;
 }
 
-/* Define a general container style */
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -28,7 +27,6 @@ h1, h2, h3 {
     box-sizing: border-box;
 }
 
-/* Add a form style */
 form {
     background-color: #fff;
     padding: 20px;

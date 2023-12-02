@@ -8,7 +8,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import 'primereact/resources/primereact.css';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../../firebase.config';
-import './SettingsForm.css'; // Import your CSS file
+import './SettingsForm.css';
 import { AuthContext } from '../../App';
 
 function SettingsForm() {
