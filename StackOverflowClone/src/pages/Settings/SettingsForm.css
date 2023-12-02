@@ -69,7 +69,7 @@ form button[type="submit"] {
 }
 .flex-container{
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .flex-rectangle {
@@ -92,7 +92,7 @@ form button[type="submit"] {
 .read-only {
   pointer-events: none;
   background-color: #f5f5f5;
-  height: 90%;
+  height: 50%;
   color: #666;
 }
 
@@ -112,10 +112,22 @@ form button[type="submit"] {
     padding: 10px 20px;
   }
   
-  .name-label {
-    display: flex;
-    align-items: center;
-  }
+.name-email-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Adjust the bottom margin */
+}
+
+.name-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Adjust the bottom margin */
+}
+
+.email-box {
+  margin-left: 10px;
+}
+  
   
   .name-box {
     margin-left: 10px;

@@ -17,10 +17,10 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 function SettingsForm() {
 
   const userdata = useContext(AuthContext);
+  const questionsCollection = collection(db, 'posts');
   const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState();
   const [allQuestions, setAllQuestions] = useState([]);
-  const questionsCollection = collection(db, 'posts');
 
   // const {
   //   allowUploadImage,
@@ -106,37 +106,52 @@ function SettingsForm() {
   }
   console.log(userInfo)
   console.log(userdata);
+  console.log(allQuestions);
   return (
     <div>
     <h1>Account Settings</h1>
     <form onSubmit={handleSettings}>
-    <label className="name-label">
-  Name:
-  <div className="name-box">
-    <InputText
-      id="name"
-      type="text"
-      className="w-full read-only"
-      value={userInfo.name}
-    />
-  </div>
+    <div className="name-email-container">
+  <label className="name-label">
+    Name:
+    <div className="name-box">
+      <InputText
+        id="name"
+        type="text"
+        className="w-full read-only"
+        value={userInfo.name}
+      />
+    </div>  
   </label>
 
-        <div className = "flex-container">
-        <div className="flex-rectangle"></div>
-        <div className= "flex-col" >
+  <label className="name-label">
+    Email:
+    <div className="email-box">
+      <InputText
+        id="email"
+        type="text"
+        className="w-full read-only"
+        value={userdata.email}
+      />
+    </div>
+  </label>
+</div>
 
-  <label className="flex-activity">Recent Post</label>
-  <InputText
-    id="activity"
-    type="text"
-    className="read-only"
-    value={`${allQuestions[0].title} ${allQuestions[0].description}`}
-  />
 
+  <div className = "flex-container">
+    <div className="flex-rectangle"></div>
+        
+    <div className="flex-col">
+      <label className="flex-activity">Recent Post</label>
+      <textarea
+        id="activity"
+        className="read-only"
+        value={`${allQuestions[0].title}\n${allQuestions[0].description}\n${"Tags: "+allQuestions[0].tags}\n${"Date Posted: " + allQuestions[0].createdAt.toDate().toDateString()}`}
+        readOnly
+      />
+    </div>
 
-        </div>
-        </div>
+  </div>
 
 
         <div className = "flex-container">
@@ -162,18 +177,7 @@ function SettingsForm() {
             </div>
         </div>
 
-        {/* <div>
-            <label>All Posts</label>
-            <InputText
-            id="repos"
-            type="text"
-            placeholder="Will Change"
-            className="large-read-only"
-          />
-        </div> */}
-        <div>
-                <button className= "button">Save</button>
-        </div>
+
     </form>
     </div>
   );
