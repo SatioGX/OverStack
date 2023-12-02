@@ -53,7 +53,7 @@ const HomePage = () => {
       setQuestionsAsked(numberOfDocuments|| 0);
     } catch(error) {
       console.log(error);
-      setIsLoading(false);
+      
     }
   }
 
@@ -66,7 +66,7 @@ const HomePage = () => {
       setAnswers(numberOfDocuments|| 0);
     } catch(error) {
       console.log(error);
-      setIsLoading(false);
+      
     }
   }
  
