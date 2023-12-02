@@ -96,13 +96,13 @@ const CreatePostForm = () => {
         }
         const data = {
             postId: generatePostId(),
-            answer: 0,
             description,
             details, 
             tags,
             title,
             createdAt: Timestamp.fromDate(new Date()),
             votes: 0,
+            postClosed: false,
             userRef: auth.currentUser.uid
         }
         try {

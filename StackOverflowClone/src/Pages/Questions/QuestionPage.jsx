@@ -9,6 +9,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import moment from 'moment/moment'
 import { Timestamp, addDoc, collection, getDocs, orderBy, query, where, getDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase.config';
+import DOMPurify from 'dompurify';
 
 
 import ReactQuill from 'react-quill';
@@ -33,8 +34,8 @@ export default function QuestionPage() {
     const isPostAnswer = (ref) => {
         return currentComments.some((comment) => comment.commentId === ref && comment.isAnswer === true);
     }
-
     const setAsAnswer = (ref) => {
+        setPostAsClosedByPostId(postId);
         setCommentAsAnswerByRef(ref);
         setIsPostAnswered(true);
     }
@@ -88,6 +89,24 @@ export default function QuestionPage() {
         ]
     }
 
+    const setPostAsClosedByPostId = async (ref) => {
+        try {
+          const postsRef = collection(db, 'posts');
+          const querySnapshot = await getDocs(query(postsRef, where('postId', '==', Number(ref))));
+      
+          querySnapshot.forEach(async (doc) => {
+            try {
+              // Update the found document(s) setting isAnswer to true
+              await updateDoc(doc.ref, { postClosed: true });
+            } catch (updateError) {
+              console.error('Error updating post:', updateError);
+            }
+          });
+        } catch (error) {
+          console.error(error);
+        }
+    }
+
     const setCommentAsAnswerByRef = async (ref) => {
         try {
           const commentsRef = collection(db, 'comments');
@@ -97,7 +116,6 @@ export default function QuestionPage() {
             try {
               // Update the found document(s) setting isAnswer to true
               await updateDoc(doc.ref, { isAnswer: true });
-              console.log(`Comment with ID ${ref} has been marked as an answer.`);
             } catch (updateError) {
               console.error('Error updating comment:', updateError);
             }
@@ -133,6 +151,7 @@ export default function QuestionPage() {
             const questionsSnapshot = await getDocs(questionQuery);
             questionsSnapshot.docs.forEach((question) => {
                 const data = question.data();
+                data.details = DOMPurify.sanitize(data.details);
                 questions.push(data);
             });
             setIsPostAuthor(questions[0].userRef === auth.currentUser.uid);
@@ -153,6 +172,7 @@ export default function QuestionPage() {
             const commentSnapshot = await getDocs(commentQuery);
             commentSnapshot.docs.forEach((comment) => {
                 const data = comment.data();
+                data.content = DOMPurify.sanitize(data.content);
                 comments.push(data);
             });
 
@@ -187,6 +207,9 @@ export default function QuestionPage() {
                         <div>
                             <h1>{question.title}</h1>
                             <p style={{ marginBottom: '15px' }}>{question.description}</p>
+                            <div dangerouslySetInnerHTML={{ __html: question.details}}>
+
+                            </div>
                             <div className="p-d-flex p-flex-wrap">
                                 {question.tags.map((tag, index) => (
                                     <Tag key={index} severity="info" value={tag} className="p-mr-2 p-mb-2" style={{ marginRight: '8px', marginBottom: '8px' }}></Tag>
@@ -207,15 +230,21 @@ export default function QuestionPage() {
                         {currentComments.map((comment) => (
                             <div key={comment.commentId} className="p-mb-2">
                                 { isPostAnswer(comment.commentId) ? (
-                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <p style={{ margin: 0, marginRight: '10px' }}>{comment.commentId} (ANSWER)</p>
-                                        <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
+                                    <div style={{ display: 'flex', flexDirection: 'column', background: '#FFF4BC' }}>
+                                        <div dangerouslySetInnerHTML={{ __html: comment.content }}></div>
+                                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '5px' }}>
+                                            <p style={{ margin: 0 }}><a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
+                                        </div>
                                     </div>
                                 ) : (
-                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <p style={{ margin: 0, marginRight: '10px' }}>{comment.commentId}</p>
-                                        <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
-                                        { isPostAuthor && <Button onClick={() => setAsAnswer(comment.commentId)} disabled={isPostAnswered} style={{marginLeft: '10px'}}>Mark as Answer</Button> }
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <div dangerouslySetInnerHTML={{ __html: comment.content }}></div>
+                                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '5px' }}>
+                                            <p style={{ margin: 0 }}><a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
+                                            {isPostAuthor && (
+                                            <Button onClick={() => setAsAnswer(comment.commentId)} disabled={isPostAnswered} style={{ marginLeft: '10px' }}>Mark as Answer</Button>
+                                            )}
+                                        </div>
                                     </div>
                                 )}
                             </div>
