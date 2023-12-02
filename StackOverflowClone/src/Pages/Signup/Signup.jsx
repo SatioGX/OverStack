@@ -46,18 +46,28 @@ function SignUp() {
   }
 
   setShowNotification(false);
-
+  try{
     const data = await createUserWithEmailAndPassword(auth, registerData.email, registerData.password);
+    
     if (data) {
       
       await addDoc(userReference, {
         userName: registerData.userName,
-        id: data.user.uid
+        id: data.user.uid,
+        questionsAsked: 0,
+        answers: 0
       });
-        alert('Succesfully Registered');
-        navigate('/');
+      setShowNotification(true);
+      setShowNotificationMessage('Succesfully Registered');
+      navigate('/');
     }
-  };
+  } catch (error){
+    setShowNotification(true);
+      const errorCode= error.code
+      const errormessage = error.message
+      setShowNotificationMessage(errormessage);
+  }
+}
 
 
   return (

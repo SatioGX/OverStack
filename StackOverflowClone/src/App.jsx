@@ -15,12 +15,11 @@ import "primeicons/primeicons.css";
 import 'primeflex/primeflex.css';
 import { auth } from '../firebase.config';
 import QuestionsPage from './Pages/Questions/QuestionsPage';
+import QuestionPage from './Pages/Questions/QuestionPage';
 
 export const AuthContext = createContext();
 
-
 function App() {
-
   const navigate= useNavigate();
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -52,9 +51,6 @@ function App() {
     });
   }, []);
 
- 
-
-
   return (
     <div>
       {isAuthenticated && <Navbar data={isAuthenticated} />}
@@ -67,10 +63,10 @@ function App() {
           <Route path='/createpost' element={<CreatePost />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/questions' element={<QuestionsPage />} />
+          <Route path='/question/:postId' element={<QuestionPage />} />
         </Routes>
       </AuthContext.Provider>
     </div>
-
   );
 }
 

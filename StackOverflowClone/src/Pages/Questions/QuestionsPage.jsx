@@ -6,11 +6,14 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { db } from '../../../firebase.config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { InputText } from 'primereact/inputtext';
 
 export default function QuestionsPage() {
   const [allQuestions, setAllQuestions] = useState([]);
+  const [tempQuestions, setTempQuestions] = useState([]);
   const [currentFilterTab, setCurrentFilterTab] = useState('Newest');
   const [isLoading, setIsLoading] = useState(true);
+  const [searchKeyword, setSearchKeyword] = useState('');
   const navigate = useNavigate();
   const questionsCollection = collection(db, 'posts');
   const tabList = [
@@ -58,6 +61,13 @@ export default function QuestionsPage() {
     }
   }, [currentFilterTab])
 
+  useEffect(() => {
+    const newQuestions = tempQuestions.filter((question) => {
+      return question.title.toLowerCase().includes(searchKeyword.toLowerCase());      
+    });
+    setAllQuestions(newQuestions);
+  }, [searchKeyword])
+
   const fetchNewestQuestion = async () => {
     setIsLoading(true);
     try {
@@ -69,6 +79,7 @@ export default function QuestionsPage() {
         newQuestions.push(data);
       })
       setAllQuestions(newQuestions);
+      setTempQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {
       console.log(error);
@@ -87,6 +98,7 @@ export default function QuestionsPage() {
         newQuestions.push(data);
       })
       setAllQuestions(newQuestions);
+      setTempQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {
       console.log(error);
@@ -104,6 +116,7 @@ export default function QuestionsPage() {
         const data = doc.data();
         newQuestions.push(data);
       })
+      setTempQuestions(newQuestions);
       setAllQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {
@@ -122,6 +135,7 @@ export default function QuestionsPage() {
         const data = doc.data();
         newQuestions.push(data);
       })
+      setTempQuestions(allQuestions);
       setAllQuestions(newQuestions);
       setIsLoading(false);
     } catch(error) {
@@ -146,7 +160,7 @@ export default function QuestionsPage() {
   return (
     <div className="flex flex-column gap-2 px-8 mt-2 align-items-start">
       <div className="flex w-full justify-content-between px-8 py-0">
-        <h2 className="text-xl font-bold">All Questions</h2>
+        <h2 className="w-2 text-xl font-bold">All Questions</h2>
         <Button 
           className="w-auto" 
           severity="info"
@@ -155,9 +169,20 @@ export default function QuestionsPage() {
           Ask Question +
         </Button>
       </div>
-      <div className="flex w-full m-0 px-8 py-0">
-        <p className="text-lg w-full font-normal">{allQuestions.length} questions</p>
-        <div className="flex w-full justify-content-end m-0 p-0 p-buttonset">
+      <div className="flex w-full justify-content-between align-items-end m-0 px-8 py-0">
+        <p className="text-lg font-normal">{allQuestions.length} questions</p>
+        <div className='w-full px-8 py-0 m-0'>
+            <span className="p-input-icon-left w-full m-0 p-0">
+                <i className="pi pi-search" />
+                <InputText 
+                  placeholder="Search" 
+                  className="w-full m-0" 
+                  value={searchKeyword}
+                  onChange={(e) => setSearchKeyword(e.target.value)}
+                />
+            </span>
+        </div>
+        <div className="flex justify-content-end m-0 p-0 p-buttonset">
           {
             tabList && tabList.map((tab, index) => {
               return (
