@@ -15,7 +15,7 @@ const HomePage = () => {
   const user = userData;
   const usersCollection = collection(db, 'users');
   const questionsCollection = collection(db, 'posts');
-  const answerCollection = collection(db, 'answers')
+  const answerCollection = collection(db, 'comments')
   useEffect(() => {
     
     if(user.uid){
