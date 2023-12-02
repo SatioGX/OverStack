@@ -7,7 +7,7 @@ import { Avatar } from 'primereact/avatar';
 import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import moment from 'moment/moment'
-import { Timestamp, addDoc, collection, getDocs, orderBy, query, where, getDoc, doc } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, getDocs, orderBy, query, where, getDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase.config';
 
 
@@ -22,10 +22,19 @@ export default function QuestionPage() {
     const [ currentAuthor, setCurrentAuthor ] = useState([]);
     const [ currentComments, setCurrentComments ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
+    const [ isPostAuthor, setIsPostAuthor ] = useState(false);
+    const [ isPostAnswer, setIsPostAnswer ] = useState(false);
 
     const questionsCollection = collection(db, 'posts');
     const usersCollection = collection(db, 'users');
     const commentsCollection = collection(db, 'comments');
+
+    const setAsAnswer = (ref) => {
+        console.log(ref);
+
+        setCommentAsAnswerByRef(ref);
+        setIsPostAnswer(true);
+    }
 
     const handleCommentChange = (value) => {
         setNewComment(value);
@@ -76,6 +85,25 @@ export default function QuestionPage() {
         ]
     }
 
+    const setCommentAsAnswerByRef = async (ref) => {
+        try {
+          const commentsRef = collection(db, 'comments');
+          const querySnapshot = await getDocs(query(commentsRef, where('commentId', '==', ref)));
+      
+          querySnapshot.forEach(async (doc) => {
+            try {
+              // Update the found document(s) setting isAnswer to true
+              await updateDoc(doc.ref, { isAnswer: true });
+              console.log(`Comment with ID ${ref} has been marked as an answer.`);
+            } catch (updateError) {
+              console.error('Error updating comment:', updateError);
+            }
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     const getCommentAuthorByRef = async (ref) => {
         try {
             const users = [];
@@ -104,6 +132,7 @@ export default function QuestionPage() {
                 const data = question.data();
                 questions.push(data);
             });
+            setIsPostAuthor(questions[0].userRef === auth.currentUser.uid);
             setCurrentQuestion(...questions);
             setIsLoading(false);
         } catch (err) {
@@ -125,6 +154,7 @@ export default function QuestionPage() {
             });
 
             setCurrentComments(comments);
+            setIsPostAnswer(comments.some((comment) => comment.isAnswer === true));
             setIsLoading(false);
         } catch (error) {
             console.error(error);
@@ -172,11 +202,19 @@ export default function QuestionPage() {
     
                     <Panel>
                         {currentComments.map((comment) => (
-                            <div key={comment.id} className="p-mb-2">
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <p style={{ margin: 0, marginRight: '10px' }}>{comment.id}</p>
-                                    <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
-                                </div>
+                            <div key={comment.commentId} className="p-mb-2">
+                                { isPostAnswer ? (
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <p style={{ margin: 0, marginRight: '10px' }}>{comment.commentId} (ANSWER)</p>
+                                        <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
+                                    </div>
+                                ) : (
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <p style={{ margin: 0, marginRight: '10px' }}>{comment.commentId}</p>
+                                        <p style={{ margin: 0 }}>{comment.content} - <a href={`#`}>{comment.author}</a> {getPostedTime(comment.createdAt)}</p>
+                                        { isPostAuthor && <Button onClick={() => setAsAnswer(comment.commentId)} style={{marginLeft: '10px'}}>Mark as Answer</Button> }
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </Panel>
@@ -191,7 +229,7 @@ export default function QuestionPage() {
                                 style={{ height: '300px' }}
                             />
                         </div>
-                        <Button label="Post Your Answer" onClick={handleSubmitComment} />
+                        <Button label="Post Your Answer" onClick={handleSubmitComment} disabled={{isPostAnswer}} />
                     </div>
                 </div>
             </div>
