@@ -124,8 +124,6 @@ export default function QuestionPage() {
                 comments.push(data);
             });
 
-            console.log(comments);
-
             setCurrentComments(comments);
             setIsLoading(false);
         } catch (error) {
