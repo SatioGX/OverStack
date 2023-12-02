@@ -1,4 +1,4 @@
-/* Reset default browser styles */
+
 body, h1, h2, h3, p, ul, ol, li, input, button {
     margin: 0;
     padding: 0;
@@ -20,7 +20,6 @@ h1, h2, h3 {
     color: #333;
 }
 
-/* Define a general container style */
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -28,7 +27,6 @@ h1, h2, h3 {
     box-sizing: border-box;
 }
 
-/* Add a form style */
 form {
     background-color: #fff;
     padding: 20px;
@@ -69,7 +67,7 @@ form button[type="submit"] {
 }
 .flex-container{
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .flex-rectangle {
@@ -92,7 +90,7 @@ form button[type="submit"] {
 .read-only {
   pointer-events: none;
   background-color: #f5f5f5;
-  height: 90%;
+  height: 50%;
   color: #666;
 }
 
@@ -112,10 +110,22 @@ form button[type="submit"] {
     padding: 10px 20px;
   }
   
-  .name-label {
-    display: flex;
-    align-items: center;
-  }
+.name-email-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.name-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.email-box {
+  margin-left: 10px;
+}
+  
   
   .name-box {
     margin-left: 10px;
