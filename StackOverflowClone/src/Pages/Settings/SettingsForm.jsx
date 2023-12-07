@@ -162,15 +162,7 @@ function SettingsForm() {
             />
           </div>
 
-          <div className="flex-panel margins">
-            <label htmlFor="aboutMe">Questions Asked</label>
-            <InputText
-              id="name"
-              type="text"
-              className="read-only"
-              value={userInfo.questionAsked}
-            />
-          </div>
+          
 
       </form>
     </div>
