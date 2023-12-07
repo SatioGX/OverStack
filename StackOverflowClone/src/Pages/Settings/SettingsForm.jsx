@@ -135,8 +135,9 @@ function SettingsForm() {
             </label>
           </div>
         </div>
-
-        <div className="flex-col">
+{
+          allQuestions.length > 0 ? (
+            <div className="flex-col">
           <label className="flex-activity">Recent Post</label>
           <textarea
             id="activity"
@@ -145,6 +146,11 @@ function SettingsForm() {
             readOnly
           />
         </div>
+
+          ) : (
+            <h1>No Questions Found</h1>
+          )
+        }
 
           <div className="flex-panel margins">
             <label>Questions Answered:</label>
