@@ -7,7 +7,7 @@ import Login from "./Pages/Login/Login";
 import SignUp from './Pages/Signup/Signup';
 import PasswordReset from './Pages/PasswordReset/PasswordReset';
 import CreatePost from './Pages/CreatePost/CreatePost'
-import HomePage from './pages/Home/HomePage';
+import HomePage from './Pages/Home/HomePage';
 import Settings from './Pages/Settings/Settings';
 import Navbar from './Components/Navbar/Navbar'
 import "primereact/resources/primereact.min.css";
