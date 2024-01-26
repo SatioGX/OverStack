@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <div className='navbar-container'>
         <div onClick={handleRedirectToHome} className='navbar-logo'>
-        <Image src='..\src\assets\overstacklogo.png' width='200px' />
+        <Image src='..\src\logo\overstacklogo.png' width='200px' />
         </div>
         <div className='navbar-links'>
             <Button onClick={handleRedirectToAbout} link>Settings</Button>
