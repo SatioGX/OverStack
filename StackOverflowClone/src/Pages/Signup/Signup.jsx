@@ -76,7 +76,7 @@ function SignUp() {
       <div className="flex align-items-center justify-content-center">
         <div className="surface-card p-4 shadow-2 border-round w-full lg:w-6">
           <div className="text-center mb-5 ">
-            <img src='https://www.xda-developers.com/files/2017/05/stack-overflow.png' alt="hyper" height={150} className="mb-3 imgs" />
+            <img src='..\src\assets\overstacklogo.png'  alt="hyper" height={150} className="mb-3 imgs" />
             <div className="text-900 text-3xl font-medium mb-3">Welcome</div>
             <span className="text-600 font-medium line-height-3">Create an Account</span>
           </div>
